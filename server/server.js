@@ -30,7 +30,11 @@ app.use('/r', redirectRoutes);
 
 app.use(errorHandler);
 
-const PORT = env.PORT;
-app.listen(PORT, () => {
-  logger.info(`Server running on port ${PORT}`);
-});
+const PORT = env.PORT || 5000;
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    logger.info(`Server running on port ${PORT}`);
+  });
+}
+
+export default app;
